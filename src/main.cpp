@@ -1,4 +1,4 @@
-#include "Spaceball/game.h"
+#include "Spaceball/game.hpp"
 #include <raylib.h>
 
 int main(void)

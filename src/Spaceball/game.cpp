@@ -1,5 +1,5 @@
-#include "game.h"
-#include "pellymath.h"
+#include "game.hpp"
+#include "pellymath.hpp"
 
 Game::Game()
 {
