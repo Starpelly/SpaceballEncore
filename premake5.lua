@@ -1,6 +1,6 @@
-workspace "Kiki"
+workspace "Spaceball"
     architecture "x64"
-    startproject "Kiki"
+    startproject "Spaceball"
 
     configurations
     {
@@ -10,8 +10,7 @@ workspace "Kiki"
 	
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-project "Kiki"
-	-- location "Fant"
+project "Spaceball"
     kind "ConsoleApp"
     language "C++"
 	cppdialect "C++17"
@@ -53,9 +52,6 @@ project "Kiki"
 
     links
     {
-        -- "%{wks.location}/bin/" .. outputdir .. "/raylib/raylib.lib",
-        -- "GLFW",
-		-- "glfw3.lib",
 		"opengl32.lib",
         "winmm"
     }

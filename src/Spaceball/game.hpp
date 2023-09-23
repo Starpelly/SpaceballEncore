@@ -52,10 +52,10 @@ private:
 		float a = (3.0f * u2 * t);
 		float b = (3.0f * u * t2);
 
-		Vector3 result = { 
-			u3* p0.x + a * p1.x + b * p2.x + t3 * p3.x,
-			u3* p0.y + a * p1.y + b * p2.y + t3 * p3.y,
-			u3* p0.z + a * p1.z + b * p2.z + t3 * p3.z
+		Vector3 result = {
+			u3 * p0.x + a * p1.x + b * p2.x + t3 * p3.x,
+			u3 * p0.y + a * p1.y + b * p2.y + t3 * p3.y,
+			u3 * p0.z + a * p1.z + b * p2.z + t3 * p3.z
 		};
 
 		return result;
