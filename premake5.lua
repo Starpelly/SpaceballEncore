@@ -1,77 +1,77 @@
 workspace "Spaceball"
-    architecture "x64"
-    startproject "Spaceball"
+	architecture "x64"
+	startproject "Spaceball"
 
-    configurations
-    {
-        "Debug",
-        "Release"
-    }
+	configurations
+	{
+		"Debug",
+		"Release"
+	}
 	
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 project "Spaceball"
-    kind "ConsoleApp"
-    language "C++"
+	kind "ConsoleApp"
+	language "C++"
 	cppdialect "C++17"
 	staticruntime "off"
 
 	targetdir ("%{wks.location}/bin/%{cfg.buildcfg}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
-    files
-    {
-        "src/**.h",
-        "src/**.c",
-        "src/**.hpp",
-        "src/**.cpp",
+	files
+	{
+		"src/**.h",
+		"src/**.c",
+		"src/**.hpp",
+		"src/**.cpp",
 
-        "vendor/raylib/src/*.c",
-        "vendor/raylib/src/*.h",
-        "vendor/raylib/src/external/*.h",
-        "vendor/raylib/src/external/*.c",
-    }
+		"vendor/raylib/src/*.c",
+		"vendor/raylib/src/*.h",
+		"vendor/raylib/src/external/*.h",
+		"vendor/raylib/src/external/*.c",
+	}
 
-    removefiles
-    {
-        "vendor/raylib/src/external/qoaplay.c"
-    }
+	removefiles
+	{
+		"vendor/raylib/src/external/qoaplay.c"
+	}
 	
 	defines
 	{
 		"_CRT_SECURE_NO_WARNINGS"
 	}
 
-    includedirs
-    {
-        "src",
-        "vendor/raylib/src/external",
-        "vendor/raylib/src/external/glfw/include",
+	includedirs
+	{
+		"src",
+		"vendor/raylib/src/external",
+		"vendor/raylib/src/external/glfw/include",
 		"vendor/raylib/src",
-    }
+	}
 
-    links
-    {
+	links
+	{
 		"opengl32.lib",
-        "winmm"
-    }
+		"winmm"
+	}
 
-    filter "system:windows"
+	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On"
-        systemversion "latest"
+		systemversion "latest"
 
-        defines
-        {
-            "PLATFORM_DESKTOP", "GRAPHICS_API_OPENGL_33", "_WINSOCK_DEPRECATED_NO_WARNINGS", "_WIN32"
-        }
+		defines
+		{
+			"PLATFORM_DESKTOP", "GRAPHICS_API_OPENGL_33", "_WINSOCK_DEPRECATED_NO_WARNINGS", "_WIN32"
+		}
 
-    filter "configurations:Debug"
-        symbols "on"
-        runtime "Debug"
+	filter "configurations:Debug"
+		symbols "on"
+		runtime "Debug"
 		buildoptions "/MTd"
-    filter "configurations:Release"
+	filter "configurations:Release"
 		defines "TRINKIT_RELEASE"
-        optimize "on"
-        runtime "Release"
+		optimize "on"
+		runtime "Release"
 		buildoptions "/MT"
