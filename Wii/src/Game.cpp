@@ -1,6 +1,12 @@
 #include "Game.hpp"
 #include "PellyMath.hpp"
 
+#include "props_png.h"
+#include "ref_png.h"
+#include "room_png.h"
+
+#include "shoot_ogg.h"
+
 Game::Game()
 {
 	/*musicBackgroundSong = LoadMusicStream("resources/spaceball.wav");
@@ -9,9 +15,12 @@ Game::Game()
 	sfxFall = LoadSound("resources/fall.wav");
 	sfxShoot = LoadSound("resources/shoot.wav");*/
 
-	texProps = Engine_LoadTexture("resources/props.png");
-	texRoom = Engine_LoadTexture("resources/room.png");
-	texRef = Engine_LoadTexture("resources/ref.png");
+	texProps = GRRLIB_LoadTexture(props_png);
+	texRoom = GRRLIB_LoadTexture(room_png);
+	texRef = GRRLIB_LoadTexture(ref_png);
+
+	GRRLIB_InitTileSet(texProps, 32, 32, 0);
+	GRRLIB_SetHandle(texProps, 16, 17);
 
 	ballEvents.push_back(4.0f);
 	ballEvents.push_back(6.0f);
@@ -30,42 +39,45 @@ Game::~Game()
 	UnloadSound(sfxFall);
 	UnloadSound(sfxShoot);*/
 
-	Engine_UnloadTexture(texProps);
-	Engine_UnloadTexture(texRoom);
-	Engine_UnloadTexture(texRef);
+	GRRLIB_FreeTexture(texProps);
+	GRRLIB_FreeTexture(texRoom);
+	GRRLIB_FreeTexture(texRef);
 }
 
 void Game::Update()
 {
-	/*
-	UpdateMusicStream(musicBackgroundSong);
-
-	// songPosition += GetFrameTime();
-	songPosition = GetMusicTimePlayed(musicBackgroundSong);
+	songPosition += 1.0f / 60.0f;
 	songPositionInBeats = songPosition / secPerBeat;
 
-	if (currentEntity < ballEvents.size())
+	if (currentEntity < (int)ballEvents.size())
 	{
 		if (songPositionInBeats >= ballEvents[currentEntity])
 		{
 			Baseball ball;
 			ball.beat = ballEvents[currentEntity];
-			ball.randomStartRot = GetRandomValue(0, 360);
 
 			ballEntities.push_back(ball);
 
-			PlaySound(sfxShoot);
+			// PlaySound(sfxShoot);
+			PlayOgg(shoot_ogg, shoot_ogg_size, 0, OGG_ONE_TIME);
 
 			currentEntity++;
 		}
 	}
+
+	/*
+	UpdateMusicStream(musicBackgroundSong);
+
+	// songPosition += GetFrameTime();
+	songPosition = GetMusicTimePlayed(musicBackgroundSong);
+
+
 	*/
 }
 
 void Game::Draw()
 {
-	/*
-	DrawTexture(texRoom, 0, 0, WHITE);
+	GRRLIB_DrawImg(0, 0, texRoom, 0, 1, 1, WHITE);
 
 	for (int i = 0; i < ballEntities.size(); i++)
 	{
@@ -88,16 +100,29 @@ void Game::Draw()
 				normalizedPitchAnim);
 
 			float multiply = 90;
-			DrawTile(texProps, 0, 3, (pos.x * multiply) + 140, (-pos.y * multiply) + 173, ballRot + ball.randomStartRot);
+
+			float x = (pos.x * multiply) + 127;
+			float y = (-pos.y * multiply) + 163;
+
+			GRRLIB_DrawTile(x, y, texProps, ballRot + ball.randomStartRot, 1, 1, WHITE, 24);
+			// GRRLIB_DrawPart(x, y, 32 * 0, 32 * 3, 32, 32, texProps, ballRot + ball.randomStartRot, 1, 1, WHITE);
+
+			// DrawTile(texProps, 0, 3, (pos.x * multiply) + 140, (-pos.y * multiply) + 173, ballRot + ball.randomStartRot);
 		}
 		else
 		{
-			PlaySound(sfxFall);
+			// PlaySound(sfxFall);
 
 			ballEntities.erase(ballEntities.begin() + i);
 		}
 	}
+	
+	GRRLIB_DrawImg(0, 95, texRef, 0, 1, 1, 0xFFFFFFAA);
 
-	DrawTexture(texRef, 0, 95, Color { 255, 255, 255, 150 });
+	/*
+	DrawTexture(texRoom, 0, 0, WHITE);
+
+	
+
 	*/
 }

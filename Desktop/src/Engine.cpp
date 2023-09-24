@@ -1,21 +1,5 @@
 #include "Engine.hpp"
 
-void Engine_Init(const char* title)
-{
-	InitWindow(1280, 720, title);
-	InitAudioDevice();
-}
-
-void Engine_Release()
-{
-	CloseAudioDevice();
-	CloseWindow();
-}
-
-bool Engine_IsRunning()
-{
-	return !WindowShouldClose();
-}
 
 void Engine_BeginDrawing()
 {

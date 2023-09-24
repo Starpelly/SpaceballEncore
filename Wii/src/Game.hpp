@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine.hpp"
+
 #include <vector>
 #include <iostream>
 
@@ -27,20 +28,13 @@ private:
 	// Music musicBackgroundSong;
 
 	// Sound sfxFall;
-	// Sound sfxShoot;
 
-	EngineTexture2D texProps;
-	EngineTexture2D texRoom;
-	EngineTexture2D texRef;
+	GRRLIB_texImg* texProps;
+	GRRLIB_texImg* texRoom;
+	GRRLIB_texImg* texRef;
 
 	std::vector<float> ballEvents;
 	std::vector<Baseball> ballEntities;
-
-	/*
-	void DrawTile(Texture2D texture, int tileX, int tileY, float xpos, float ypos, float rot)
-	{
-		DrawTexturePro(texture, Rectangle{ 32.0f * tileX, 32.0f * tileY, 32.0f, 32.0f }, Rectangle{ xpos, ypos, 32.0f, 32.0f }, Vector2{ 16.0f, 16.0f }, rot, WHITE);
-	}
 
 	Vector3 GetPointOnBezierCurve(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
 	{
@@ -61,5 +55,13 @@ private:
 
 		return result;
 	}
+
+	/*
+	void DrawTile(Texture2D texture, int tileX, int tileY, float xpos, float ypos, float rot)
+	{
+		DrawTexturePro(texture, Rectangle{ 32.0f * tileX, 32.0f * tileY, 32.0f, 32.0f }, Rectangle{ xpos, ypos, 32.0f, 32.0f }, Vector2{ 16.0f, 16.0f }, rot, WHITE);
+	}
+
+
 	*/
 };

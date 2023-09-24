@@ -3,20 +3,22 @@
 
 int main()
 {
-	Engine_Init("Spaceball");
+	InitWindow(1280, 720, "Spaceball");
+	InitAudioDevice();
 
 	Game game;
 
-	while (Engine_IsRunning())
+	while (!WindowShouldClose())
 	{
 		game.Update();
 
-		Engine_BeginDrawing();
+		BeginDrawing();
 
 		game.Draw();
 
-		Engine_EndDrawing();
+		EndDrawing();
 	}
-	Engine_Release();
+	CloseAudioDevice();
+	CloseWindow();
 	return 0;
 }
