@@ -1,11 +1,8 @@
-local devkitpro = os.getenv("DEVKITPRO");
-local devkitarm = os.getenv("DEVKITARM");
-
 local dolphinPath = "C:/Users/Braedon/Documents/Dolphin-x64/Dolphin.exe";
 
 workspace "Spaceball"
 	architecture "x64"
-	startproject "Spaceball"
+	startproject "Wii"
 
 	configurations
 	{
