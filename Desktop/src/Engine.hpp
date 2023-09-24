@@ -1,13 +1,8 @@
 #pragma once
 
-#ifdef ENGINE_RAYLIB
 #include <raylib.h>
 
 typedef Texture2D EngineTexture2D;
-// typedef struct Music EngineMusicStream;
-
-#endif
-
 
 void Engine_Init(const char* title);
 void Engine_Release();

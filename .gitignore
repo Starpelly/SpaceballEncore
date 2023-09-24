@@ -2,6 +2,9 @@
 **/bin/
 bin-int/
 Intermediates/
+**.dol
+**.elf
+**/build
 
 # Visual Studio files and folder
 .vs/

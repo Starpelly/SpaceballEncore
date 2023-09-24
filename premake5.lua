@@ -15,6 +15,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 project "Desktop"
 	kind "ConsoleApp"
+	location "Desktop"
 	language "C++"
 	cppdialect "C++17"
 	staticruntime "off"
@@ -24,20 +25,20 @@ project "Desktop"
 
 	files
 	{
-		"src/**.h",
-		"src/**.c",
-		"src/**.hpp",
-		"src/**.cpp",
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.c",
+		"%{prj.name}/src/**.hpp",
+		"%{prj.name}/src/**.cpp",
 
-		"vendor/raylib/src/*.c",
-		"vendor/raylib/src/*.h",
-		"vendor/raylib/src/external/*.h",
-		"vendor/raylib/src/external/*.c",
+		"%{prj.name}/vendor/raylib/src/*.c",
+		"%{prj.name}/vendor/raylib/src/*.h",
+		"%{prj.name}/vendor/raylib/src/external/*.h",
+		"%{prj.name}/vendor/raylib/src/external/*.c",
 	}
 
 	removefiles
 	{
-		"vendor/raylib/src/external/qoaplay.c"
+		"%{prj.name}/vendor/raylib/src/external/qoaplay.c"
 	}
 	
 	defines
@@ -47,16 +48,15 @@ project "Desktop"
 
 	includedirs
 	{
-		"src",
-		"vendor/raylib/src/external",
-		"vendor/raylib/src/external/glfw/include",
-		"vendor/raylib/src",
+		"%{prj.name}/src",
+		"%{prj.name}/vendor/raylib/src/external",
+		"%{prj.name}/vendor/raylib/src/external/glfw/include",
+		"%{prj.name}/vendor/raylib/src",
 	}
 
 	links
 	{
 		"opengl32.lib",
-		"winmm"
 	}
 
 	filter "system:windows"
@@ -66,7 +66,14 @@ project "Desktop"
 
 		defines
 		{
-			"PLATFORM_DESKTOP", "ENGINE_RAYLIB", "GRAPHICS_API_OPENGL_33", "_WINSOCK_DEPRECATED_NO_WARNINGS", "_WIN32"
+			"PLATFORM_DESKTOP", "GRAPHICS_API_OPENGL_33", "WIN32"
+		}
+
+		links
+		{
+			"imm32",
+			"winmm",
+			"version"
 		}
 
 	filter "configurations:Debug"
@@ -82,36 +89,37 @@ project "Desktop"
 		buildoptions "/MT"
 
 project "Wii"
-	kind "ConsoleApp"
-	language "C++"
-	cppdialect "C++17"
-	staticruntime "off"
+	kind "Makefile"
+	location "Wii"
 
 	targetdir ("%{wks.location}/bin/%{cfg.buildcfg}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
-	makesettings [[
-		CXX = arm-none-eabi-g++
-		LD = arm-none-eabi-ld
-	]]
+	buildcommands
+	{
+		"make"
+	}
+
+	rebuildcommands
+	{
+		"make -B"
+	}
+
+	cleancommands
+	{
+		"make clean"
+	}
 
 	files
 	{
-		"src/**.h",
-		"src/**.c",
-		"src/**.hpp",
-		"src/**.cpp",
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.c",
+		"%{prj.name}/src/**.hpp",
+		"%{prj.name}/src/**.cpp",
 	}
 
 	includedirs
 	{
-		"src"
+		"C:/GRRLIB/GRRLIB/GRRLIB",
+		"C:/devkitPro/libogc/include"
 	}
-	
-	filter "configurations:Debug"
-		defines "DEBUG"
-		symbols "on"
-
-	filter "configurations:Release"
-		defines "RELEASE"
-		optimize "on"

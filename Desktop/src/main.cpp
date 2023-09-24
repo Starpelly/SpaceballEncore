@@ -1,7 +1,7 @@
-#include "Engine/Engine.hpp"
-#include "Spaceball/game.hpp"
+#include "Engine.hpp"
+#include "Game.hpp"
 
-int main(void)
+int main()
 {
 	Engine_Init("Spaceball");
 
@@ -18,4 +18,5 @@ int main(void)
 		Engine_EndDrawing();
 	}
 	Engine_Release();
+	return 0;
 }
