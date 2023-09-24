@@ -3,15 +3,15 @@
 
 Game::Game()
 {
-	musicBackgroundSong = LoadMusicStream("resources/spaceball.wav");
+	/*musicBackgroundSong = LoadMusicStream("resources/spaceball.wav");
 	PlayMusicStream(musicBackgroundSong);
 
 	sfxFall = LoadSound("resources/fall.wav");
-	sfxShoot = LoadSound("resources/shoot.wav");
+	sfxShoot = LoadSound("resources/shoot.wav");*/
 
-	texProps = LoadTexture("resources/props.png");
-	texRoom = LoadTexture("resources/room.png");
-	texRef = LoadTexture("resources/ref.png");
+	texProps = Engine_LoadTexture("resources/props.png");
+	texRoom = Engine_LoadTexture("resources/room.png");
+	texRef = Engine_LoadTexture("resources/ref.png");
 
 	ballEvents.push_back(4.0f);
 	ballEvents.push_back(6.0f);
@@ -25,18 +25,19 @@ Game::Game()
 
 Game::~Game()
 {
-	UnloadMusicStream(musicBackgroundSong);
+	/*UnloadMusicStream(musicBackgroundSong);
 
 	UnloadSound(sfxFall);
-	UnloadSound(sfxShoot);
+	UnloadSound(sfxShoot);*/
 
-	UnloadTexture(texProps);
-	UnloadTexture(texRoom);
-	UnloadTexture(texRef);
+	Engine_UnloadTexture(texProps);
+	Engine_UnloadTexture(texRoom);
+	Engine_UnloadTexture(texRef);
 }
 
 void Game::Update()
 {
+	/*
 	UpdateMusicStream(musicBackgroundSong);
 
 	// songPosition += GetFrameTime();
@@ -58,10 +59,12 @@ void Game::Update()
 			currentEntity++;
 		}
 	}
+	*/
 }
 
 void Game::Draw()
 {
+	/*
 	DrawTexture(texRoom, 0, 0, WHITE);
 
 	for (int i = 0; i < ballEntities.size(); i++)
@@ -96,4 +99,5 @@ void Game::Draw()
 	}
 
 	DrawTexture(texRef, 0, 95, Color { 255, 255, 255, 150 });
+	*/
 }

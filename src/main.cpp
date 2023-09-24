@@ -1,26 +1,21 @@
+#include "Engine/Engine.hpp"
 #include "Spaceball/game.hpp"
-#include <raylib.h>
 
 int main(void)
 {
-	SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-	InitWindow(1280, 720, "Spaceball");
-	InitAudioDevice();
+	Engine_Init("Spaceball");
 
 	Game game;
 
-	while (!WindowShouldClose())
+	while (Engine_IsRunning())
 	{
 		game.Update();
 
-		BeginDrawing();
-		ClearBackground(RAYWHITE);
+		Engine_BeginDrawing();
 
 		game.Draw();
 
-		EndDrawing();
+		Engine_EndDrawing();
 	}
-
-	CloseAudioDevice();
-	CloseWindow();
+	Engine_Release();
 }

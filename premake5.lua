@@ -1,3 +1,6 @@
+local devkitpro = os.getenv("DEVKITPRO");
+local devkitarm = os.getenv("DEVKITARM");
+
 workspace "Spaceball"
 	architecture "x64"
 	startproject "Spaceball"
@@ -10,7 +13,7 @@ workspace "Spaceball"
 	
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-project "Spaceball"
+project "Desktop"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"
@@ -63,15 +66,52 @@ project "Spaceball"
 
 		defines
 		{
-			"PLATFORM_DESKTOP", "GRAPHICS_API_OPENGL_33", "_WINSOCK_DEPRECATED_NO_WARNINGS", "_WIN32"
+			"PLATFORM_DESKTOP", "ENGINE_RAYLIB", "GRAPHICS_API_OPENGL_33", "_WINSOCK_DEPRECATED_NO_WARNINGS", "_WIN32"
 		}
 
 	filter "configurations:Debug"
+		defines "DEBUG"
 		symbols "on"
 		runtime "Debug"
 		buildoptions "/MTd"
+
 	filter "configurations:Release"
-		defines "TRINKIT_RELEASE"
+		defines "RELEASE"
 		optimize "on"
 		runtime "Release"
 		buildoptions "/MT"
+
+project "Wii"
+	kind "ConsoleApp"
+	language "C++"
+	cppdialect "C++17"
+	staticruntime "off"
+
+	targetdir ("%{wks.location}/bin/%{cfg.buildcfg}")
+	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
+
+	makesettings [[
+		CXX = arm-none-eabi-g++
+		LD = arm-none-eabi-ld
+	]]
+
+	files
+	{
+		"src/**.h",
+		"src/**.c",
+		"src/**.hpp",
+		"src/**.cpp",
+	}
+
+	includedirs
+	{
+		"src"
+	}
+	
+	filter "configurations:Debug"
+		defines "DEBUG"
+		symbols "on"
+
+	filter "configurations:Release"
+		defines "RELEASE"
+		optimize "on"

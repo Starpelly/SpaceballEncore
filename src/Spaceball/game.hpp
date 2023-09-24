@@ -1,6 +1,6 @@
 #pragma once
 
-#include <raylib.h>
+#include "Engine/Engine.hpp"
 #include <vector>
 #include <iostream>
 
@@ -24,18 +24,19 @@ private:
 	float bpm = 104.275;
 	float secPerBeat = 60.0f / bpm;
 
-	Music musicBackgroundSong;
+	// Music musicBackgroundSong;
 
-	Sound sfxFall;
-	Sound sfxShoot;
+	// Sound sfxFall;
+	// Sound sfxShoot;
 
-	Texture2D texProps;
-	Texture2D texRoom;
-	Texture2D texRef;
+	EngineTexture2D texProps;
+	EngineTexture2D texRoom;
+	EngineTexture2D texRef;
 
 	std::vector<float> ballEvents;
 	std::vector<Baseball> ballEntities;
 
+	/*
 	void DrawTile(Texture2D texture, int tileX, int tileY, float xpos, float ypos, float rot)
 	{
 		DrawTexturePro(texture, Rectangle{ 32.0f * tileX, 32.0f * tileY, 32.0f, 32.0f }, Rectangle{ xpos, ypos, 32.0f, 32.0f }, Vector2{ 16.0f, 16.0f }, rot, WHITE);
@@ -60,4 +61,5 @@ private:
 
 		return result;
 	}
+	*/
 };
